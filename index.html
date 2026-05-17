@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oh My Eve! – Fun For All Ages | Orlando Events</title>
+  <meta name="description" content="Luxury glitter bar, glitter tattoos, face gems & hair braiding for events across Orlando and beyond. Fun for all ages!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple-deep: #3D2070;
+      --purple-mid: #5B3A8C;
+      --purple-light: #9B7FC0;
+      --purple-pale: #F0EBF9;
+      --mauve: #C4889A;
+      --mauve-light: #F8EEF2;
+      --off-white: #FAF8FD;
+      --text-dark: #1A1025;
+      --text-mid: #4A3560;
+      --text-muted: #8878A0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(155,127,192,0.2);
+      padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 70px;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(91,58,140,0.12); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 44px; width: 44px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 900; color: var(--purple-deep); line-height: 1; }
+    .nav-logo-text span { color: var(--mauve); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.87rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--purple-mid); }
+    .nav-cta { background: var(--purple-mid) !important; color: white !important; padding: 0.52rem 1.3rem !important; border-radius: 50px !important; font-weight: 600 !important; }
+    .nav-cta:hover { background: var(--purple-deep) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--purple-mid); border-radius: 2px; display: block; }
+
+    /* ── HERO with DISCO SHIMMER ── */
+    #home {
+      min-height: 100vh;
+      background: #1A0A35;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 8rem 2rem 5rem;
+    }
+    /* Disco ball shimmer tiles */
+    .disco-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(135deg, #1A0A35 0%, #3D2070 45%, #5B3A8C 75%, #7B4F7A 100%);
+    }
+    .disco-tiles {
+      position: absolute; inset: 0; z-index: 1;
+      overflow: hidden;
+    }
+    .disco-tiles::before, .disco-tiles::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      animation: disco-spin 8s linear infinite;
+    }
+    .disco-tiles::before {
+      width: 600px; height: 600px;
+      top: -200px; right: -150px;
+      background: conic-gradient(
+        rgba(196,136,154,0) 0deg,
+        rgba(196,136,154,0.25) 20deg,
+        rgba(155,127,192,0.4) 40deg,
+        rgba(255,255,255,0.2) 60deg,
+        rgba(91,58,140,0.3) 80deg,
+        rgba(196,136,154,0) 100deg,
+        rgba(196,136,154,0.15) 140deg,
+        rgba(255,255,255,0.3) 180deg,
+        rgba(155,127,192,0.2) 220deg,
+        rgba(196,136,154,0) 260deg,
+        rgba(255,255,255,0.25) 300deg,
+        rgba(196,136,154,0) 360deg
+      );
+      filter: blur(2px);
+    }
+    .disco-tiles::after {
+      width: 400px; height: 400px;
+      bottom: -100px; left: -100px;
+      background: conic-gradient(
+        rgba(155,127,192,0) 0deg,
+        rgba(255,255,255,0.2) 30deg,
+        rgba(196,136,154,0.3) 70deg,
+        rgba(155,127,192,0) 120deg,
+        rgba(255,255,255,0.15) 200deg,
+        rgba(196,136,154,0.2) 280deg,
+        rgba(155,127,192,0) 360deg
+      );
+      filter: blur(2px);
+      animation-direction: reverse;
+      animation-duration: 12s;
+    }
+    @keyframes disco-spin { to { transform: rotate(360deg); } }
+
+    /* Shimmer grid overlay */
+    .shimmer-grid {
+      position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: grid-shift 20s linear infinite;
+    }
+    @keyframes grid-shift { to { background-position: 40px 40px; } }
+
+    /* Floating glitter dots */
+    .glitter-dot {
+      position: absolute; border-radius: 50%; pointer-events: none; z-index: 2;
+      animation: glitter-float var(--gd, 4s) var(--gdelay, 0s) infinite ease-in-out;
+    }
+    @keyframes glitter-float {
+      0%   { opacity: 0; transform: translateY(0) scale(0) rotate(0deg); }
+      25%  { opacity: 1; transform: translateY(-30px) scale(1) rotate(90deg); }
+      75%  { opacity: 0.5; transform: translateY(-90px) scale(0.7) rotate(270deg); }
+      100% { opacity: 0; transform: translateY(-130px) scale(0) rotate(360deg); }
+    }
+    /* Star sparkles */
+    .star-spark {
+      position: absolute; z-index: 2; pointer-events: none; color: white;
+      font-size: var(--ss, 14px);
+      animation: star-twinkle var(--std, 3s) var(--stdelay, 0s) infinite ease-in-out;
+    }
+    @keyframes star-twinkle {
+      0%,100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50%      { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+
+    .hero-content { text-align: center; z-index: 10; max-width: 780px; position: relative; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: #E8D9FF; font-size: 0.78rem; font-weight: 500; padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.2rem,8vw,6.5rem); font-weight: 900; color: white; line-height: 1.05; margin-bottom: 0.4rem; text-shadow: 0 0 40px rgba(196,136,154,0.4); }
+    .hero-title em { font-style: italic; color: #DDB8F0; }
+    .hero-sub { font-family: 'Playfair Display', serif; font-size: clamp(0.9rem,2vw,1.2rem); color: rgba(255,255,255,0.55); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.8rem; }
+    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,0.78); line-height: 1.8; max-width: 560px; margin: 0 auto 2.5rem; font-weight: 300; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--mauve); color: white; padding: .9rem 2.2rem; border-radius: 50px; font-size: .95rem; font-weight: 600; text-decoration: none; transition: background .2s, transform .2s, box-shadow .2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: #B07080; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,136,154,.45); }
+    .btn-outline { background: transparent; color: white; padding: .9rem 2.2rem; border-radius: 50px; border: 1.5px solid rgba(255,255,255,.4); font-size: .95rem; font-weight: 500; text-decoration: none; transition: background .2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline:hover { background: rgba(255,255,255,.1); }
+    .btn-packages { background: rgba(255,255,255,0.15); color: white; padding: .9rem 2.2rem; border-radius: 50px; border: 1.5px solid rgba(255,255,255,.6); font-size: .95rem; font-weight: 600; text-decoration: none; backdrop-filter: blur(4px); display: inline-flex; align-items: center; gap: 8px; transition: background .2s; }
+    .btn-packages:hover { background: rgba(255,255,255,.25); }
+    .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(255,255,255,.4); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; animation: bob 2s infinite; z-index: 10; }
+    .scroll-hint::after { content:""; width:1px; height:36px; background: linear-gradient(to bottom,rgba(255,255,255,.4),transparent); }
+    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .eyebrow { font-size: .75rem; font-weight: 600; color: var(--mauve); letter-spacing: .18em; text-transform: uppercase; margin-bottom: .6rem; }
+    .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: var(--purple-deep); line-height: 1.15; margin-bottom: 1rem; }
+    .sec-title em { font-style: italic; color: var(--mauve); }
+    .sec-lead { font-size: 1rem; color: var(--text-muted); line-height: 1.8; max-width: 600px; }
+
+    /* ── ABOUT ── */
+    #about { background: white; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3.5rem; }
+    .img-box { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg,var(--purple-pale),var(--mauve-light)); border-radius: 30px 30px 30px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; font-size: 4.5rem; position: relative; overflow: hidden; }
+    .img-box small { font-size: .75rem; color: var(--text-muted); font-family: 'DM Sans',sans-serif; }
+    .float-badge { position: absolute; bottom: -1.5rem; right: -1.5rem; background: var(--purple-mid); color: white; padding: 1.2rem 1.5rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 36px rgba(91,58,140,.35); }
+    .float-badge strong { display: block; font-size: 2rem; font-weight: 700; line-height: 1; }
+    .float-badge span { font-size: .74rem; opacity: .85; }
+    .about-copy p { font-size: 1rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 1.1rem; font-weight: 300; }
+    .tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem; }
+    .tag { background: var(--purple-pale); color: var(--purple-mid); font-size: .82rem; font-weight: 500; padding: .4rem 1rem; border-radius: 50px; }
+
+    /* ── PACKAGES ── */
+    #packages { background: var(--off-white); }
+    .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .pkg-card {
+      background: white; border-radius: 28px; padding: 2.2rem 2rem;
+      border: 1px solid rgba(155,127,192,0.15);
+      position: relative; transition: transform .25s, box-shadow .25s;
+      display: flex; flex-direction: column;
+    }
+    .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(91,58,140,0.12); }
+    .pkg-card.featured {
+      border: 2px solid var(--purple-mid);
+      background: linear-gradient(160deg, #F7F2FF 0%, #FFF 100%);
+    }
+    .pkg-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--purple-mid); color: white;
+      font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      padding: .3rem 1.2rem; border-radius: 50px;
+      white-space: nowrap;
+    }
+    .pkg-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--purple-deep); margin-bottom: .25rem; }
+    .pkg-sub { font-size: .82rem; color: var(--text-muted); margin-bottom: 1.4rem; }
+    .pkg-price { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; color: var(--purple-mid); line-height: 1; margin-bottom: 1.6rem; }
+    .pkg-price span { font-size: 1.4rem; vertical-align: top; margin-top: .5rem; display: inline-block; }
+    .pkg-divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--purple-mid), var(--mauve)); border-radius: 2px; margin-bottom: 1.4rem; }
+    .pkg-features { list-style: none; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
+    .pkg-features li { display: flex; align-items: flex-start; gap: .7rem; font-size: .9rem; color: var(--text-mid); font-weight: 300; line-height: 1.4; }
+    .pkg-features li::before { content: "✦"; color: var(--mauve); font-size: .7rem; margin-top: .18rem; flex-shrink: 0; }
+    .pkg-cta { margin-top: 2rem; display: block; text-align: center; background: var(--purple-mid); color: white; padding: .82rem 1.5rem; border-radius: 50px; font-size: .9rem; font-weight: 600; text-decoration: none; transition: background .2s, transform .2s; }
+    .pkg-cta:hover { background: var(--purple-deep); transform: translateY(-2px); }
+    .pkg-card.featured .pkg-cta { background: var(--mauve); }
+    .pkg-card.featured .pkg-cta:hover { background: #B07080; }
+
+    /* Add-ons */
+    .addons-box {
+      margin-top: 3rem;
+      background: linear-gradient(135deg, var(--purple-deep), #2A1250);
+      border-radius: 24px; padding: 2.5rem;
+    }
+    .addons-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: white; margin-bottom: .4rem; }
+    .addons-box .sub { color: rgba(255,255,255,.55); font-size: .85rem; margin-bottom: 2rem; }
+    .addons-list { display: flex; flex-direction: column; gap: .8rem; margin-bottom: 2rem; }
+    .addon-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px; padding: 1rem 1.4rem;
+    }
+    .addon-row span { color: rgba(255,255,255,.85); font-size: .92rem; }
+    .addon-row strong { color: var(--mauve); font-size: 1rem; font-weight: 700; white-space: nowrap; }
+    .deposit-note {
+      text-align: center; color: rgba(255,255,255,.5);
+      font-size: .82rem; border-top: 1px solid rgba(255,255,255,.1); padding-top: 1.5rem;
+      font-style: italic;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: white; }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1.4rem; margin-top: 3rem; }
+    .srv-card { background: var(--off-white); border-radius: 24px; padding: 2rem 1.8rem; border: 1px solid rgba(155,127,192,.12); transition: transform .25s, box-shadow .25s; position: relative; overflow: hidden; }
+    .srv-card::before { content:""; position: absolute; top:0; left:0; right:0; height:4px; background: linear-gradient(90deg,var(--purple-mid),var(--mauve)); border-radius: 24px 24px 0 0; }
+    .srv-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(91,58,140,.1); }
+    .srv-icon { font-size: 2.4rem; margin-bottom: .9rem; display: block; }
+    .srv-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--purple-deep); margin-bottom: .5rem; }
+    .srv-card p { font-size: .88rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+    .event-banner { background: linear-gradient(135deg,var(--purple-deep),var(--purple-mid)); border-radius: 24px; padding: 2.5rem; margin-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+    .event-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: .4rem; }
+    .event-banner p { color: rgba(255,255,255,.7); font-size: .9rem; }
+    .chip-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .chip { background: rgba(255,255,255,.14); color: white; font-size: .78rem; font-weight: 500; padding: .35rem .85rem; border-radius: 50px; border: 1px solid rgba(255,255,255,.2); }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--off-white); }
+    .gal-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .gal-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .7rem; }
+    .gal-item { border-radius: 12px; overflow: hidden; cursor: pointer; background: var(--purple-pale); aspect-ratio: 1; position: relative; }
+    .gal-item.gal-featured { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+    .gal-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; display: block; }
+    .gal-item:hover img { transform: scale(1.06); }
+    .gal-item::after { content:""; position:absolute;inset:0;background:rgba(61,32,112,0);transition:background .3s;pointer-events:none; }
+    .gal-item:hover::after { background:rgba(61,32,112,0.18); }
+    .admin-tip { margin-top: 1.4rem; background: var(--purple-pale); border: 1px dashed var(--purple-light); border-radius: 12px; padding: 1rem 1.4rem; font-size: .84rem; color: var(--text-mid); }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: white; }
+    .rev-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(270px,1fr)); gap: 1.4rem; margin-top: 2.5rem; }
+    .rev-card { background: var(--off-white); border-radius: 20px; padding: 1.8rem; border: 1px solid rgba(155,127,192,.1); position: relative; }
+    .rev-card::before { content:"\201C"; position: absolute; top: .8rem; right: 1.2rem; font-family: 'Playfair Display',serif; font-size: 5rem; line-height: 1; color: var(--purple-pale); font-weight: 900; }
+    .stars { color: #F5A623; font-size: .9rem; margin-bottom: .8rem; letter-spacing: 2px; }
+    .rev-text { font-size: .92rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1.3rem; font-weight: 300; font-style: italic; }
+    .rev-author { display: flex; align-items: center; gap: .7rem; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,var(--purple-mid),var(--mauve)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: .82rem; flex-shrink: 0; }
+    .author-name { font-weight: 600; font-size: .88rem; color: var(--text-dark); }
+    .author-event { font-size: .76rem; color: var(--text-muted); }
+
+    /* Google Reviews CTA */
+    .google-cta {
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--purple-pale) 100%);
+      border: 1px solid rgba(155,127,192,.2);
+      border-radius: 20px; padding: 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .google-cta-left h3 { font-family: 'Playfair Display',serif; font-size: 1.3rem; color: var(--purple-deep); margin-bottom: .3rem; }
+    .google-cta-left p { font-size: .88rem; color: var(--text-muted); }
+    .btn-google {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: white; color: var(--text-dark);
+      border: 1.5px solid rgba(155,127,192,.3);
+      padding: .82rem 1.6rem; border-radius: 50px;
+      font-size: .9rem; font-weight: 600; text-decoration: none;
+      transition: box-shadow .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .btn-google:hover { box-shadow: 0 6px 20px rgba(91,58,140,.15); transform: translateY(-2px); }
+    .btn-google svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    .rev-cta { margin-top: 2rem; background: linear-gradient(135deg,var(--purple-pale),var(--mauve-light)); border-radius: 20px; padding: 2.5rem; text-align: center; }
+    .rev-cta h3 { font-family: 'Playfair Display',serif; font-size: 1.4rem; color: var(--purple-deep); margin-bottom: .4rem; }
+    .rev-cta p { color: var(--text-muted); font-size: .88rem; margin-bottom: 1.4rem; }
+    .rev-form { display: flex; flex-direction: column; gap: .9rem; max-width: 480px; margin: 0 auto; }
+    .rev-form input, .rev-form textarea, .rev-form select { width: 100%; padding: .82rem 1.1rem; border: 1.5px solid rgba(155,127,192,.25); border-radius: 12px; font-family: 'DM Sans',sans-serif; font-size: .88rem; color: var(--text-dark); background: white; outline: none; transition: border-color .2s; resize: vertical; }
+    .rev-form input:focus, .rev-form textarea:focus, .rev-form select:focus { border-color: var(--purple-light); }
+    .rev-form textarea { min-height: 95px; }
+    .btn-sub { background: var(--purple-mid); color: white; border: none; padding: .88rem 2rem; border-radius: 50px; font-family: 'DM Sans',sans-serif; font-size: .92rem; font-weight: 600; cursor: pointer; transition: background .2s, transform .2s; }
+    .btn-sub:hover { background: var(--purple-deep); transform: translateY(-2px); }
+    .form-ok { display: none; background: #EBF7F0; color: #2E7D52; border-radius: 12px; padding: .9rem 1.4rem; font-size: .88rem; font-weight: 500; }
+
+    /* ── CONTACT ── */
+    #contact { background: linear-gradient(135deg,#1A0A35,#2A1250); position: relative; overflow: hidden; }
+    #contact::before { content:""; position:absolute; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(196,136,154,.15),transparent 70%); top:-180px; right:-180px; pointer-events:none; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .c-left .eyebrow { color: rgba(196,136,154,.9); }
+    .c-left .sec-title { color: white; }
+    .c-left > p { color: rgba(255,255,255,.7); font-size: .98rem; line-height: 1.8; font-weight: 300; margin-bottom: 2rem; }
+    .c-info { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 2rem; }
+    .c-item { display: flex; align-items: center; gap: .9rem; color: rgba(255,255,255,.82); font-size: .92rem; }
+    .c-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .btn-wa { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: .95rem 2.2rem; border-radius: 50px; font-size: .95rem; font-weight: 600; text-decoration: none; transition: background .2s, transform .2s, box-shadow .2s; }
+    .btn-wa:hover { background: #1EB855; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,.35); }
+    .btn-wa svg { width: 21px; height: 21px; fill: white; flex-shrink: 0; }
+    .c-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 28px; padding: 2.5rem; backdrop-filter: blur(8px); }
+    .c-card h3 { font-family: 'Playfair Display',serif; font-size: 1.35rem; color: white; margin-bottom: 1.4rem; }
+    .c-form { display: flex; flex-direction: column; gap: .9rem; }
+    .c-form input, .c-form select, .c-form textarea { width: 100%; padding: .88rem 1.1rem; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.15); border-radius: 14px; font-family: 'DM Sans',sans-serif; font-size: .88rem; color: white; outline: none; transition: border-color .2s; resize: vertical; }
+    .c-form input::placeholder, .c-form textarea::placeholder { color: rgba(255,255,255,.4); }
+    .c-form select option { color: var(--text-dark); background: white; }
+    .c-form input:focus, .c-form select:focus, .c-form textarea:focus { border-color: var(--mauve); }
+    .c-form textarea { min-height: 105px; }
+    .btn-send { background: var(--mauve); color: white; border: none; padding: .95rem 2rem; border-radius: 50px; font-family: 'DM Sans',sans-serif; font-size: .92rem; font-weight: 600; cursor: pointer; transition: background .2s, transform .2s; }
+    .btn-send:hover { background: #B07080; transform: translateY(-2px); }
+    .quote-intro { margin-bottom: 1.8rem; }
+    .quote-intro h3 { font-family: 'Playfair Display',serif; font-size: 1.35rem; color: white; margin-bottom: .7rem; }
+    .quote-intro > p { color: rgba(255,255,255,.7); font-size: .87rem; line-height: 1.7; margin-bottom: 1rem; }
+    .quote-notes { display: flex; flex-direction: column; gap: .5rem; }
+    .quote-note { background: rgba(255,255,255,.07); border-left: 3px solid var(--mauve); border-radius: 0 8px 8px 0; padding: .6rem .9rem; color: rgba(255,255,255,.65); font-size: .8rem; line-height: 1.5; }
+    .field-group { display: flex; flex-direction: column; gap: .35rem; }
+    .field-group label { color: rgba(255,255,255,.7); font-size: .78rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+    .checkboxes { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .cb-label { display: flex; align-items: center; gap: .4rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 50px; padding: .4rem .9rem; color: rgba(255,255,255,.8); font-size: .82rem; cursor: pointer; transition: background .2s; }
+    .cb-label:hover { background: rgba(255,255,255,.15); }
+    .cb-label input { accent-color: var(--mauve); width: 14px; height: 14px; }
+    @media(max-width:480px){ .field-row { grid-template-columns: 1fr; } }
+    .c-ok { display:none; color: rgba(255,255,255,.82); font-size:.88rem; text-align:center; padding:.7rem; background: rgba(255,255,255,.08); border-radius: 12px; margin-top: .5rem; }
+
+    /* ── FOOTER ── */
+    footer { background: #0F0820; padding: 3rem 2rem; text-align: center; }
+    .f-inner { max-width: 1100px; margin: 0 auto; }
+    .f-logo { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 1rem; }
+    .f-logo img { height: 38px; width: 38px; object-fit: contain; opacity: .85; }
+    .f-logo-text { font-family: 'Playfair Display',serif; font-size: 1.15rem; font-weight: 900; color: rgba(255,255,255,.82); }
+    .f-tag { color: rgba(255,255,255,.3); font-size: .78rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1.8rem; }
+    .f-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; list-style: none; margin-bottom: 1.8rem; }
+    .f-links a { text-decoration: none; color: rgba(255,255,255,.4); font-size: .82rem; transition: color .2s; }
+    .f-links a:hover { color: var(--mauve); }
+    .f-copy { color: rgba(255,255,255,.22); font-size: .76rem; }
+
+    /* ── WA FLOAT ── */
+    .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 300; width: 56px; height: 56px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 22px rgba(37,211,102,.45); text-decoration: none; transition: transform .2s; animation: pulse-wa 2.5s infinite; }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+    @keyframes pulse-wa { 0%,100%{box-shadow:0 6px 22px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.3)} 50%{box-shadow:0 6px 22px rgba(37,211,102,.45),0 0 0 12px rgba(37,211,102,0)} }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .nav-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:white;padding:1.5rem 2rem;border-bottom:1px solid rgba(155,127,192,.2);gap:1.1rem}
+      .hamburger{display:flex}
+      .about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
+      .float-badge{display:none}
+      .gal-grid{grid-template-columns:1fr 1fr}
+      .gal-item.gal-featured{grid-column:span 2}
+      .google-cta{flex-direction:column}
+    }
+    @media(max-width:480px){
+      .gal-grid{grid-template-columns:1fr}
+      .gal-item:first-child{grid-column:span 1}
+      section{padding:4rem 1.2rem}
+      .hero-btns{flex-direction:column;align-items:center}
+      .event-banner{flex-direction:column}
+      .pkg-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/15618099438?text=Hi%20Valeriia!%20I%27d%20love%20to%20book%20Oh%20My%20Eve!%20for%20my%20event." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <img src="logo.png" alt="Oh My Eve!" />
+    <span class="nav-logo-text">Oh My <span>Eve!</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="disco-bg"></div>
+  <div class="disco-tiles"></div>
+  <div class="shimmer-grid"></div>
+  <div id="glitterContainer"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">✦ Orlando &amp; Beyond</div>
+    <h1 class="hero-title">Oh My <em>Eve!</em></h1>
+    <p class="hero-sub">Fun For All Ages ✦ Mobile Event Entertainment</p>
+    <p class="hero-desc">Bringing sparkle, creativity, and unforgettable fun to celebrations everywhere — luxury glitter bars, glitter tattoos, face gems &amp; stylish hair braiding.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">✨ Book Your Event</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+      <a href="#packages" class="btn-packages">🎀 Party Packages</a>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div style="position:relative;">
+        <div class="img-box" style="padding:0;background:none;">
+          <img src="Picture_Princial.webp" alt="Valeriia – Oh My Eve!" style="width:100%;height:100%;object-fit:cover;border-radius:30px 30px 30px 8px;" />
+        </div>
+        <div class="float-badge">
+          <strong>100%</strong>
+          <span>Mobile Setup</span>
+        </div>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow">About Us</p>
+        <h2 class="sec-title">Meet <em>Valeriia</em> — The Face Behind the Magic</h2>
+        <p>Oh My Eve! is a mobile glitter bar experience bringing a touch of sparkle, joy, and magic to celebrations across Orlando and beyond.</p>
+        <p>We create unforgettable moments with glitter tattoos, face gems, and beautiful braided hairstyles — all designed to make every guest feel special and full of glow.</p>
+        <p>All cosmetics used are <strong>professional-grade and 100% skin safe</strong>.</p>
+        <p>Our team provides a complete professional setup with high-quality materials, beautiful styling, and a vibrant atmosphere that keeps guests engaged and entertained throughout your event.</p>
+        <div class="tags">
+          <span class="tag">✨ Luxury Glitter Bar</span>
+          <span class="tag">🎨 Glitter Tattoos</span>
+          <span class="tag">💎 Face Gems</span>
+          <span class="tag">💇 Hair Braiding</span>
+          <span class="tag">📍 Orlando &amp; Beyond</span>
+          <span class="tag">🎉 All Ages Welcome</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="inner">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="sec-title">Party <em>Packages</em></h2>
+    <p class="sec-lead">Choose the perfect package for your celebration. All packages include professional setup and a vibrant, memorable experience!</p>
+
+    <div class="pkg-grid">
+
+      <!-- VIP Glam -->
+      <div class="pkg-card">
+        <p class="pkg-name">The VIP Glam</p>
+        <p class="pkg-sub">Up to 3 people · 1 hour</p>
+        <div class="pkg-price"><span>$</span>250</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Full glam face gems</li>
+          <li>Glitter tattoos</li>
+          <li>Hair sparkle</li>
+          <li>Personalized goodie bag</li>
+          <li>Priority styling</li>
+        </ul>
+        <a href="https://wa.me/15618099438?text=Hi!%20I%27d%20like%20to%20book%20The%20VIP%20Glam%20package!" target="_blank" class="pkg-cta">Book This Package</a>
+      </div>
+
+      <!-- Glitter Bar — FEATURED -->
+      <div class="pkg-card featured">
+        <div class="pkg-badge">⭐ Most Booked</div>
+        <p class="pkg-name">Glitter Bar</p>
+        <p class="pkg-sub">Up to 8 girls · 1 hour</p>
+        <div class="pkg-price"><span>$</span>200</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Unlimited face gems</li>
+          <li>Unlimited glitter tattoos</li>
+          <li>Hair sparkle</li>
+          <li>Full bar setup &amp; breakdown</li>
+        </ul>
+        <a href="https://wa.me/15618099438?text=Hi!%20I%27d%20like%20to%20book%20the%20Glitter%20Bar%20package!" target="_blank" class="pkg-cta">Book This Package</a>
+      </div>
+
+      <!-- Glitter & Hair Bar -->
+      <div class="pkg-card">
+        <p class="pkg-name">Glitter &amp; Hair Bar</p>
+        <p class="pkg-sub">Up to 6 girls · 1 hour</p>
+        <div class="pkg-price"><span>$</span>280</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Unlimited face gems</li>
+          <li>Unlimited glitter tattoos</li>
+          <li>Hair sparkle</li>
+          <li>Hair extensions styling</li>
+          <li>Full bar setup &amp; breakdown</li>
+        </ul>
+        <a href="https://wa.me/15618099438?text=Hi!%20I%27d%20like%20to%20book%20the%20Glitter%20%26%20Hair%20Bar%20package!" target="_blank" class="pkg-cta">Book This Package</a>
+      </div>
+
+    </div>
+
+    <!-- Add-ons -->
+    <div class="addons-box">
+      <h3>✦ Add-ons</h3>
+      <p class="sub">Customize your package to fit your event perfectly</p>
+      <div class="addons-list">
+        <div class="addon-row">
+          <span>Extra girl — Glitter Bar</span>
+          <strong>+$25/person</strong>
+        </div>
+        <div class="addon-row">
+          <span>Extra girl — Glitter &amp; Hair Bar</span>
+          <strong>+$35/person</strong>
+        </div>
+        <div class="addon-row">
+          <span>Extra hour extension</span>
+          <strong>+$50/hr</strong>
+        </div>
+      </div>
+      <p class="deposit-note">50% deposit required to hold your date. Balance due day of event.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="inner">
+    <p class="eyebrow">What We Offer</p>
+    <h2 class="sec-title">Our <em>Signature</em> Services</h2>
+    <p class="sec-lead">Whether you're planning an intimate birthday or a large festival, we add the perfect touch of glam, fun, and unforgettable memories.</p>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <span class="srv-icon">✨</span>
+        <h3>Luxury Glitter Bar</h3>
+        <p>A stunning glam station with premium cosmetic glitters, holographic shimmers, and biodegradable options for face and body art.</p>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">🎨</span>
+        <h3>Glitter Tattoos</h3>
+        <p>Long-lasting, hypoallergenic glitter tattoos in hundreds of designs — stars, butterflies, crowns and more. Safe for all ages!</p>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">💎</span>
+        <h3>Face Gems</h3>
+        <p>Beautiful rhinestone and crystal face decorations applied by our skilled artists — magical, photo-worthy, and stunning for all ages.</p>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">💇</span>
+        <h3>Hair Braiding</h3>
+        <p>Stylish braids, twists, and festival-inspired hairstyles that add a fun touch to any celebration. Quick and elegant for all hair types.</p>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">🎪</span>
+        <h3>Full Event Setup</h3>
+        <p>We arrive fully equipped — professional station, quality products, beautiful displays — creating a vibrant entertainment zone at your venue.</p>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">🌟</span>
+        <h3>Hair Sparkle</h3>
+        <p>Add a magical glittery touch to any hairstyle! Our hair sparkle service makes every guest feel like a star — perfect for all ages.</p>
+      </div>
+    </div>
+    <div class="event-banner">
+      <div>
+        <h3>Perfect for Every Occasion</h3>
+        <p>We bring the magic to all kinds of celebrations</p>
+      </div>
+      <div class="chip-list">
+        <span class="chip">🎂 Birthday Parties</span>
+        <span class="chip">🎓 Graduations</span>
+        <span class="chip">🏢 Corporate Events</span>
+        <span class="chip">🎪 Family Festivals</span>
+        <span class="chip">🏫 School Celebrations</span>
+        <span class="chip">🌟 Community Events</span>
+        <span class="chip">💍 Bridal Showers</span>
+        <span class="chip">🎉 Any Celebration!</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="inner">
+    <div class="gal-head">
+      <div>
+        <p class="eyebrow">Our Work</p>
+        <h2 class="sec-title">Gallery of <em>Magic</em></h2>
+      </div>
+      <p style="color:var(--text-muted);font-size:.88rem;max-width:260px;text-align:right;line-height:1.6;">Real moments from real events — send your photos and I'll add them here!</p>
+    </div>
+    <div class="gal-grid" id="galleryGrid">
+      <div class="gal-item gal-featured">
+        <img src="Picture_Princial.webp" alt="Oh My Eve – glitter bar setup" />
+      </div>
+      <div class="gal-item"><img src="Picture_01.jpg" alt="Oh My Eve – glitter gems" /></div>
+      <div class="gal-item"><img src="Picture_02.jpg" alt="Oh My Eve – face gems application" /></div>
+      <div class="gal-item"><img src="Picture_03.jpg" alt="Oh My Eve – happy guest" /></div>
+      <div class="gal-item"><img src="Picture_05.webp" alt="Oh My Eve – glitter tattoo on child" /></div>
+      <div class="gal-item"><img src="Picture_06.webp" alt="Oh My Eve – artist with child" /></div>
+      <div class="gal-item"><img src="Picture_07.webp" alt="Oh My Eve – glitter tattoo application" /></div>
+      <div class="gal-item"><img src="Picture_08.webp" alt="Oh My Eve – face gems close up" /></div>
+      <div class="gal-item"><img src="Picture_09.jpeg" alt="Oh My Eve – event setup outdoor" /></div>
+      <div class="gal-item"><img src="Picture_10.jpeg" alt="Oh My Eve – Valeriia at event" /></div>
+      <div class="gal-item"><img src="Picture_11.jpeg" alt="Oh My Eve – branded shirt" /></div>
+      <div class="gal-item"><img src="Picture_12.jpeg" alt="Oh My Eve – glitter tattoo neck" /></div>
+      <div class="gal-item"><img src="Picture_13.jpeg" alt="Oh My Eve – disco ball decor" /></div>
+      <div class="gal-item"><img src="Picture_14.jpeg" alt="Oh My Eve – glitter on child face" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="inner">
+    <p class="eyebrow">Client Love</p>
+    <h2 class="sec-title">What Families <em>Say</em></h2>
+    <p class="sec-lead">Real reviews from real families who trusted us to make their events unforgettable.</p>
+
+    <div class="rev-grid" id="revGrid">
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-text">"Valeriia and her team were absolutely amazing at my daughter's birthday! The kids were glittered up and glowing all night. Every parent was asking for the contact info!"</p>
+        <div class="rev-author"><div class="avatar">SM</div><div><div class="author-name">Sarah M.</div><div class="author-event">Birthday Party · Orlando</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-text">"We hired Oh My Eve! for our school carnival and they were a huge hit. Professional, fun, and so kind with the kids. 100% booking again next year!"</p>
+        <div class="rev-author"><div class="avatar">JR</div><div><div class="author-name">Jennifer R.</div><div class="author-event">School Festival · Kissimmee</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-text">"The glitter tattoos were a huge hit at our corporate family day. Adults loved it as much as the kids! Setup was beautiful and the team was super professional."</p>
+        <div class="rev-author"><div class="avatar">DL</div><div><div class="author-name">David L.</div><div class="author-event">Corporate Event · Orlando</div></div></div>
+      </div>
+    </div>
+
+    <!-- Google Reviews -->
+    <div class="google-cta">
+      <div class="google-cta-left">
+        <h3>Find us on Google Maps ⭐</h3>
+        <p>See our location and leave a review — it means the world to us!</p>
+      </div>
+      <a href="https://maps.app.goo.gl/vPLHPpn3dAGoXf8P6" target="_blank" class="btn-google">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#EA4335"/>
+        </svg>
+        View on Google Maps
+      </a>
+    </div>
+
+    <!-- Leave a review form -->
+    <div class="rev-cta">
+      <h3>Share Your Experience ✨</h3>
+      <p>Were you at one of our events? We'd love to hear from you!</p>
+      <form class="rev-form" id="revForm" onsubmit="submitReview(event)">
+        <input type="text" id="rName" placeholder="Your name" required />
+        <input type="text" id="rEvent" placeholder="Type of event (e.g. Birthday Party · Orlando)" />
+        <select id="rStars">
+          <option value="5">★★★★★ — 5 Stars</option>
+          <option value="4">★★★★☆ — 4 Stars</option>
+          <option value="3">★★★☆☆ — 3 Stars</option>
+        </select>
+        <textarea id="rText" placeholder="Tell us about your experience..." required></textarea>
+        <button type="submit" class="btn-sub">Submit Review ✨</button>
+        <div class="form-ok" id="revOk">🎉 Thank you! Your review has been added.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="contact-grid">
+      <div class="c-left">
+        <p class="eyebrow">Get In Touch</p>
+        <h2 class="sec-title">Ready to Add <em>Sparkle</em> to Your Event?</h2>
+        <p>Contact Valeriia directly and let's start planning your perfect event experience. We serve Orlando and surrounding areas — and beyond!</p>
+        <div class="c-info">
+          <div class="c-item"><div class="c-icon">📍</div><span>Orlando, Florida &amp; Beyond</span></div>
+          <div class="c-item"><div class="c-icon">📱</div><span>+1 (561) 809-9438</span></div>
+          <div class="c-item"><div class="c-icon">✨</div><span>Available for all event types &amp; sizes</span></div>
+        </div>
+        <a href="https://wa.me/15618099438?text=Hi%20Valeriia!%20I%27d%20love%20to%20book%20Oh%20My%20Eve!%20for%20my%20event." target="_blank" class="btn-wa">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+      <div class="c-card">
+        <div class="quote-intro">
+          <h3>✨ Quote Request Form</h3>
+          <p>Thank you for your interest in Oh My Eve! We'd love to be part of your celebration and help create unforgettable memories. Please complete this form and we'll respond within <strong>1–2 business days</strong>.</p>
+          <div class="quote-notes">
+            <div class="quote-note">✨ Please submit your request well in advance to secure your date.</div>
+            <div class="quote-note">✨ Submitting this form does not guarantee a booking until availability is confirmed and the required deposit is made.</div>
+          </div>
+        </div>
+        <form class="c-form" id="contactForm" onsubmit="submitContact(event)">
+          <div class="field-group">
+            <label>Full Name *</label>
+            <input type="text" placeholder="Your full name" required />
+          </div>
+          <div class="field-group">
+            <label>Email Address *</label>
+            <input type="email" placeholder="your@email.com" required />
+          </div>
+          <div class="field-group">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" placeholder="+1 (000) 000-0000" />
+          </div>
+          <div class="field-group">
+            <label>Event Address *</label>
+            <input type="text" placeholder="City or full address (Orlando and surrounding areas)" required />
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>Event Date *</label>
+              <input type="date" required />
+            </div>
+            <div class="field-group">
+              <label>Event Start Time</label>
+              <input type="time" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>Number of Guests *</label>
+              <input type="number" placeholder="e.g. 20" min="1" required />
+            </div>
+            <div class="field-group">
+              <label>Duration Needed</label>
+              <select>
+                <option value="">Select...</option>
+                <option>1 hour</option>
+                <option>2 hours</option>
+                <option>3 hours</option>
+                <option>4+ hours</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Type of Event *</label>
+            <select required>
+              <option value="">Select event type...</option>
+              <option>Birthday Party</option>
+              <option>Graduation</option>
+              <option>Corporate Event</option>
+              <option>School / Festival</option>
+              <option>Bridal Shower</option>
+              <option>Community Gathering</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Services Interested In</label>
+            <div class="checkboxes">
+              <label class="cb-label"><input type="checkbox" /> ✨ Glitter Bar</label>
+              <label class="cb-label"><input type="checkbox" /> 🎨 Glitter Tattoos</label>
+              <label class="cb-label"><input type="checkbox" /> 💎 Face Gems</label>
+              <label class="cb-label"><input type="checkbox" /> 💇 Hair Braiding</label>
+              <label class="cb-label"><input type="checkbox" /> 🌟 Hair Sparkle</label>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Additional Notes</label>
+            <textarea placeholder="Any special requests, theme, or details about your event..."></textarea>
+          </div>
+          <button type="submit" class="btn-send">Send Quote Request ✨</button>
+          <div class="c-ok" id="cOk">🎉 Request sent! Valeriia will reach out within 1–2 business days.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-inner">
+    <div class="f-logo">
+      <img src="logo.png" alt="Oh My Eve!" />
+      <span class="f-logo-text">Oh My Eve!</span>
+    </div>
+    <p class="f-tag">Fun For All Ages ✦ Orlando, Florida</p>
+    <ul class="f-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://wa.me/15618099438" target="_blank">WhatsApp</a></li>
+      <li><a href="https://maps.app.goo.gl/vPLHPpn3dAGoXf8P6" target="_blank">Google Maps</a></li>
+    </ul>
+    <p class="f-copy">© 2025 Oh My Eve! · All rights reserved · Made with ✨ in Orlando, FL · <a href="https://www.instagram.com/oh.my.eve" target="_blank" style="color:var(--mauve);text-decoration:none;">@oh.my.eve</a></p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Hamburger
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // Disco glitter dots
+  const gc = document.getElementById('glitterContainer');
+  gc.style.cssText = 'position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden';
+  const colors = ['rgba(196,136,154,0.9)','rgba(255,255,255,0.9)','rgba(155,127,192,0.9)','rgba(221,184,240,0.9)','rgba(255,215,0,0.8)'];
+  for (let i = 0; i < 60; i++) {
+    const d = document.createElement('div');
+    const size = 2 + Math.random() * 5;
+    d.className = 'glitter-dot';
+    d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};--gd:${3+Math.random()*6}s;--gdelay:${Math.random()*8}s`;
+    gc.appendChild(d);
+  }
+  // Star sparkles
+  const stars = ['✦','✧','★','✶','✸'];
+  for (let i = 0; i < 20; i++) {
+    const s = document.createElement('div');
+    s.className = 'star-spark';
+    s.textContent = stars[Math.floor(Math.random()*stars.length)];
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--ss:${10+Math.random()*12}px;--std:${2+Math.random()*4}s;--stdelay:${Math.random()*6}s`;
+    gc.appendChild(s);
+  }
+
+  // Review form
+  function submitReview(e) {
+    e.preventDefault();
+    const name = document.getElementById('rName').value.trim();
+    const event = document.getElementById('rEvent').value.trim();
+    const stars = parseInt(document.getElementById('rStars').value);
+    const text = document.getElementById('rText').value.trim();
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+    const starsHtml = '★'.repeat(stars) + '☆'.repeat(5-stars);
+    const card = document.createElement('div');
+    card.className = 'rev-card';
+    card.style.border = '2px solid rgba(155,127,192,.3)';
+    card.innerHTML = `<div class="stars">${starsHtml}</div><p class="rev-text">"${text}"</p><div class="rev-author"><div class="avatar">${initials}</div><div><div class="author-name">${name}</div><div class="author-event">${event||'Happy Customer'}</div></div></div>`;
+    document.getElementById('revGrid').appendChild(card);
+    document.getElementById('revForm').reset();
+    const ok = document.getElementById('revOk');
+    ok.style.display = 'block';
+    setTimeout(() => ok.style.display = 'none', 4000);
+  }
+
+  // Contact form
+  function submitContact(e) {
+    e.preventDefault();
+    const ok = document.getElementById('cOk');
+    ok.style.display = 'block';
+    e.target.reset();
+    setTimeout(() => ok.style.display = 'none', 5000);
+  }
+</script>
+</body>
+</html>
