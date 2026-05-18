@@ -294,6 +294,8 @@
     .btn-google:hover { box-shadow: 0 6px 20px rgba(91,58,140,.15); transform: translateY(-2px); }
     .btn-google svg { width: 20px; height: 20px; flex-shrink: 0; }
 
+    .no-reviews { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+    .no-reviews-icon { font-size: 3rem; margin-bottom: 1rem; }
     .rev-cta { margin-top: 2rem; background: linear-gradient(135deg,var(--purple-pale),var(--mauve-light)); border-radius: 20px; padding: 2.5rem; text-align: center; }
     .rev-cta h3 { font-family: 'Playfair Display',serif; font-size: 1.4rem; color: var(--purple-deep); margin-bottom: .4rem; }
     .rev-cta p { color: var(--text-muted); font-size: .88rem; margin-bottom: 1.4rem; }
@@ -640,21 +642,12 @@
     <p class="sec-lead">Real reviews from real families who trusted us to make their events unforgettable.</p>
 
     <div class="rev-grid" id="revGrid">
-      <div class="rev-card">
-        <div class="stars">★★★★★</div>
-        <p class="rev-text">"Valeriia and her team were absolutely amazing at my daughter's birthday! The kids were glittered up and glowing all night. Every parent was asking for the contact info!"</p>
-        <div class="rev-author"><div class="avatar">SM</div><div><div class="author-name">Sarah M.</div><div class="author-event">Birthday Party · Orlando</div></div></div>
-      </div>
-      <div class="rev-card">
-        <div class="stars">★★★★★</div>
-        <p class="rev-text">"We hired Oh My Eve! for our school carnival and they were a huge hit. Professional, fun, and so kind with the kids. 100% booking again next year!"</p>
-        <div class="rev-author"><div class="avatar">JR</div><div><div class="author-name">Jennifer R.</div><div class="author-event">School Festival · Kissimmee</div></div></div>
-      </div>
-      <div class="rev-card">
-        <div class="stars">★★★★★</div>
-        <p class="rev-text">"The glitter tattoos were a huge hit at our corporate family day. Adults loved it as much as the kids! Setup was beautiful and the team was super professional."</p>
-        <div class="rev-author"><div class="avatar">DL</div><div><div class="author-name">David L.</div><div class="author-event">Corporate Event · Orlando</div></div></div>
-      </div>
+      <!-- Reviews will appear here as customers submit them -->
+    </div>
+
+    <div class="no-reviews" id="noReviews">
+      <div class="no-reviews-icon">⭐</div>
+      <p>Be the first to share your experience with Oh My Eve!</p>
     </div>
 
     <!-- Google Reviews -->
@@ -862,6 +855,9 @@
     const text = document.getElementById('rText').value.trim();
     const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
     const starsHtml = '★'.repeat(stars) + '☆'.repeat(5-stars);
+    // Hide empty state
+    const noRev = document.getElementById('noReviews');
+    if (noRev) noRev.style.display = 'none';
     const card = document.createElement('div');
     card.className = 'rev-card';
     card.style.border = '2px solid rgba(155,127,192,.3)';
