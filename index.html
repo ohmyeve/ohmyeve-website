@@ -252,23 +252,13 @@
     #gallery { background: var(--off-white); }
     .gal-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
     <!-- GALLERY FIXED 3 -->
-    .gal-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: .7rem; margin-bottom: .7rem; height: 260px; }
-    .gal-top .gal-item { height: 260px; border-radius: 16px; overflow: hidden; position: relative; flex-shrink: 0; }
-    .gal-top .gal-item img { width:100%; height:100%; object-fit:cover; transition: transform .4s; display:block; }
-    .gal-top .gal-item:hover img { transform: scale(1.05); }
-
-    /* CAROUSEL */
-    .gal-carousel-wrap { position: relative; }
-    .gal-carousel { display: flex; gap: .7rem; overflow-x: hidden; scroll-behavior: smooth; border-radius: 14px; }
-    .gal-carousel .gal-item { flex: 0 0 calc(25% - 0.53rem); min-width: 200px; aspect-ratio: 1; border-radius: 14px; overflow: hidden; position: relative; flex-shrink: 0; }
-    .gal-carousel .gal-item img { width:100%; height:100%; object-fit:cover; transition: transform .4s; display:block; }
-    .gal-carousel .gal-item:hover img { transform: scale(1.05); }
+    .gal-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .7rem; }
+    .gal-item { border-radius: 12px; overflow: hidden; cursor: pointer; background: var(--purple-pale); aspect-ratio: 1; position: relative; }
+    .gal-item.gal-featured { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+    .gal-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; display: block; }
+    .gal-item:hover img { transform: scale(1.06); }
     .gal-item::after { content:""; position:absolute;inset:0;background:rgba(61,32,112,0);transition:background .3s;pointer-events:none; }
-    .gal-item:hover::after { background:rgba(61,32,112,0.15); }
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 42px; height: 42px; border-radius: 50%; background: white; border: none; box-shadow: 0 4px 16px rgba(91,58,140,.25); cursor: pointer; font-size: 1.1rem; color: var(--purple-mid); transition: background .2s, transform .2s; display: flex; align-items: center; justify-content: center; }
-    .carousel-btn:hover { background: var(--purple-mid); color: white; transform: translateY(-50%) scale(1.08); }
-    .carousel-btn.prev { left: -18px; }
-    .carousel-btn.next { right: -18px; }
+    .gal-item:hover::after { background:rgba(61,32,112,0.18); }
     @media(max-width:768px){
       .gal-top { grid-template-columns: 1fr 1fr; }
       .gal-top { grid-template-columns: 2fr 1fr 1fr; height: 180px; }
@@ -635,29 +625,20 @@
       </div>
       <p style="color:var(--text-muted);font-size:.88rem;max-width:260px;text-align:right;line-height:1.6;">Real moments from real events — send your photos and I'll add them here!</p>
     </div>
-    <!-- 3 fixed photos -->
-    <div class="gal-top">
-      <div class="gal-item"><img src="Picture_Princial.webp" alt="Oh My Eve – Valery glitter bar" /></div>
+    <div class="gal-grid" id="galleryGrid">
+      <div class="gal-item gal-featured"><img src="Picture_Princial.webp" alt="Oh My Eve – Valery glitter bar" /></div>
       <div class="gal-item"><img src="Picture_01.jpg" alt="Oh My Eve – glitter gems" /></div>
       <div class="gal-item"><img src="Picture_02.jpg" alt="Oh My Eve – face gems application" /></div>
-    </div>
-
-    <!-- Carousel with remaining 10 photos -->
-    <div class="gal-carousel-wrap">
-      <button class="carousel-btn prev" onclick="scrollCarousel(-1)" aria-label="Previous">&#8592;</button>
-      <div class="gal-carousel" id="galCarousel">
-        <div class="gal-item"><img src="Picture_03.jpg" alt="Oh My Eve – happy guest" /></div>
-        <div class="gal-item"><img src="Picture_05.webp" alt="Oh My Eve – glitter tattoo on child" /></div>
-        <div class="gal-item"><img src="Picture_06.webp" alt="Oh My Eve – artist with child" /></div>
-        <div class="gal-item"><img src="Picture_07.webp" alt="Oh My Eve – glitter tattoo application" /></div>
-        <div class="gal-item"><img src="Picture_09.jpeg" alt="Oh My Eve – event setup outdoor" /></div>
-        <div class="gal-item"><img src="Picture_10.jpeg" alt="Oh My Eve – Valery at event" /></div>
-        <div class="gal-item"><img src="Picture_11.jpeg" alt="Oh My Eve – branded shirt" /></div>
-        <div class="gal-item"><img src="Picture_12.jpeg" alt="Oh My Eve – glitter tattoo neck" /></div>
-        <div class="gal-item"><img src="Picture_13.jpeg" alt="Oh My Eve – disco ball decor" /></div>
-        <div class="gal-item"><img src="Picture_14.jpeg" alt="Oh My Eve – glitter on child face" /></div>
-      </div>
-      <button class="carousel-btn next" onclick="scrollCarousel(1)" aria-label="Next">&#8594;</button>
+      <div class="gal-item"><img src="Picture_03.jpg" alt="Oh My Eve – happy guest" /></div>
+      <div class="gal-item"><img src="Picture_05.webp" alt="Oh My Eve – glitter tattoo on child" /></div>
+      <div class="gal-item"><img src="Picture_06.webp" alt="Oh My Eve – artist with child" /></div>
+      <div class="gal-item"><img src="Picture_07.webp" alt="Oh My Eve – glitter tattoo application" /></div>
+      <div class="gal-item"><img src="Picture_09.jpeg" alt="Oh My Eve – event setup outdoor" /></div>
+      <div class="gal-item"><img src="Picture_10.jpeg" alt="Oh My Eve – Valery at event" /></div>
+      <div class="gal-item"><img src="Picture_11.jpeg" alt="Oh My Eve – branded shirt" /></div>
+      <div class="gal-item"><img src="Picture_12.jpeg" alt="Oh My Eve – glitter tattoo neck" /></div>
+      <div class="gal-item"><img src="Picture_13.jpeg" alt="Oh My Eve – disco ball decor" /></div>
+      <div class="gal-item"><img src="Picture_14.jpeg" alt="Oh My Eve – glitter on child face" /></div>
     </div>
   </div>
 </section>
