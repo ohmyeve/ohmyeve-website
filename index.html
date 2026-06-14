@@ -979,12 +979,15 @@
     if (!isOpen) item.classList.add('open');
   }
 
-  // Custom slow smooth scroll
+  // Custom slow smooth scroll (cancellable)
+  let scrollAnimId = 0;
   function slowScrollTo(el, targetLeft, duration) {
     const start = el.scrollLeft;
     const diff = targetLeft - start;
     const startTime = performance.now();
+    const myId = ++scrollAnimId;
     function step(now) {
+      if (myId !== scrollAnimId) return; // cancelled by a newer scroll request
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const ease = progress < 0.5 ? 2*progress*progress : 1 - Math.pow(-2*progress+2,2)/2; // easeInOutQuad
@@ -1012,9 +1015,9 @@
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
       if (carousel.scrollLeft + itemW * 2 >= maxScroll - 5) {
         // Loop back to start
-        slowScrollTo(carousel, 0, 1000);
+        slowScrollTo(carousel, 0, 500);
       } else {
-        slowScrollTo(carousel, carousel.scrollLeft + itemW * 2, 1000);
+        slowScrollTo(carousel, carousel.scrollLeft + itemW * 2, 500);
       }
     }
 
