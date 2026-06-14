@@ -999,7 +999,7 @@
     const c = document.getElementById('galCarousel');
     const itemW = c.querySelector('.gal-item').offsetWidth + 11;
     const target = c.scrollLeft + dir * itemW * 2;
-    slowScrollTo(c, target, 900);
+    slowScrollTo(c, target, 1000);
   }
 
   // Carousel autoplay
@@ -1012,15 +1012,15 @@
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
       if (carousel.scrollLeft + itemW * 2 >= maxScroll - 5) {
         // Loop back to start
-        slowScrollTo(carousel, 0, 1800);
+        slowScrollTo(carousel, 0, 1000);
       } else {
-        slowScrollTo(carousel, carousel.scrollLeft + itemW * 2, 1800);
+        slowScrollTo(carousel, carousel.scrollLeft + itemW * 2, 1000);
       }
     }
 
     function startAutoplay() {
       stopAutoplay();
-      autoplayInterval = setInterval(nextSlide, 6000);
+      autoplayInterval = setInterval(nextSlide, 1000);
     }
     function stopAutoplay() {
       if (autoplayInterval) clearInterval(autoplayInterval);
