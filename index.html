@@ -979,11 +979,27 @@
     if (!isOpen) item.classList.add('open');
   }
 
+  // Custom slow smooth scroll
+  function slowScrollTo(el, targetLeft, duration) {
+    const start = el.scrollLeft;
+    const diff = targetLeft - start;
+    const startTime = performance.now();
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = progress < 0.5 ? 2*progress*progress : 1 - Math.pow(-2*progress+2,2)/2; // easeInOutQuad
+      el.scrollLeft = start + diff * ease;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   // Carousel scroll
   function scrollCarousel(dir) {
     const c = document.getElementById('galCarousel');
     const itemW = c.querySelector('.gal-item').offsetWidth + 11;
-    c.scrollBy({ left: dir * itemW * 2, behavior: 'smooth' });
+    const target = c.scrollLeft + dir * itemW * 2;
+    slowScrollTo(c, target, 900);
   }
 
   // Carousel autoplay
@@ -996,9 +1012,9 @@
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
       if (carousel.scrollLeft + itemW * 2 >= maxScroll - 5) {
         // Loop back to start
-        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        slowScrollTo(carousel, 0, 1800);
       } else {
-        carousel.scrollBy({ left: itemW * 2, behavior: 'smooth' });
+        slowScrollTo(carousel, carousel.scrollLeft + itemW * 2, 1800);
       }
     }
 
