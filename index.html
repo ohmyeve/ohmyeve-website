@@ -1015,15 +1015,15 @@
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
       if (carousel.scrollLeft + itemW * 2 >= maxScroll - 5) {
         // Loop back to start
-        slowScrollTo(carousel, 0, 500);
+        slowScrollTo(carousel, 0, 1200);
       } else {
-        slowScrollTo(carousel, carousel.scrollLeft + itemW * 2, 500);
+        slowScrollTo(carousel, carousel.scrollLeft + itemW * 2, 1200);
       }
     }
 
     function startAutoplay() {
       stopAutoplay();
-      autoplayInterval = setInterval(nextSlide, 1000);
+      autoplayInterval = setInterval(nextSlide, 2800);
     }
     function stopAutoplay() {
       if (autoplayInterval) clearInterval(autoplayInterval);
