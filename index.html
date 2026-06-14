@@ -986,6 +986,47 @@
     c.scrollBy({ left: dir * itemW * 2, behavior: 'smooth' });
   }
 
+  // Carousel autoplay
+  (function() {
+    const carousel = document.getElementById('galCarousel');
+    let autoplayInterval;
+
+    function nextSlide() {
+      const itemW = carousel.querySelector('.gal-item').offsetWidth + 11;
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      if (carousel.scrollLeft + itemW * 2 >= maxScroll - 5) {
+        // Loop back to start
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        carousel.scrollBy({ left: itemW * 2, behavior: 'smooth' });
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayInterval = setInterval(nextSlide, 3500);
+    }
+    function stopAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+    }
+
+    // Pause on hover/touch, resume after
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('touchstart', stopAutoplay, { passive: true });
+    carousel.addEventListener('touchend', () => setTimeout(startAutoplay, 4000), { passive: true });
+
+    // Pause when manual arrows used, resume after
+    document.querySelectorAll('.carousel-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        stopAutoplay();
+        setTimeout(startAutoplay, 4000);
+      });
+    });
+
+    startAutoplay();
+  })();
+
   // Nav scroll
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
